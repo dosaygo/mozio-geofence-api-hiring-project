@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width, initial-scale=1">
     <title>API Explorer</title>
     <style>
       :root {
         font-family: Georgia, serif;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: subpixel-antialiased;
+      }
+      iframe {
+        width: 100%;
+        box-sizing: border-box;
+        border: 0;
       }
       body {
         background-color: lightblue;
+      }
+      article {
+        display: inline-block;
+        vertical-align:top;
+      }
+      main {
+        margin: 0 auto;
+        padding-bottom: 8rem;
+      }
+      section {
+        text-align: center;
       }
       h1, h2 {
         font-family: Helvetica, san s-serif;
         letter-spacing: 0.03rem;
         word-break: break-word;
         text-align: center;
-      }
-      iframe {
-        width: 100%;
-        box-sizing: border-box;
-        border: 0;
       }
       h1 { 
         margin: 0;
@@ -34,11 +49,11 @@
       }
       fieldset {
         padding: 1rem;
-        background: #fff;
+        background: #fcf9ed;
         margin: 1rem;
       }
       legend {
-        background: #fff;
+        background: #fcf9ed;
         text-align: left;
       }
       [center] {
@@ -50,47 +65,45 @@
       p {
         text-align: left;
         margin: 0;
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.22;
+        box-sizing: border-box;
+        white-space: normal;
+        word-break: break-word;
       }
       label {
         display: inline-block;
         width: 150px;
       }
       input, select, textarea {
-        font-size: 1rem;
+        font-size: inherit;
         margin: 0.5rem 0;
         width:150px;
         box-sizing: border-box;
-      }
-      article {
-        display: inline-block;
-      }
-      main {
-        margin: 0 auto;
-        padding-bottom: 8rem;
-      }
-      section {
-        text-align: center;
       }
       .description {
         font-weight: 300;
         font-size: 10pt;
         color: grey;
       }
-      article {
-        vertical-align:top;
-      }
       .result-box {
         width: 40%;
+        min-width: 320px;
+        max-width: 600px;
         max-height: 100%;
         border: 2px groove lightgrey;
-        background: #fff;
+        background: #fcf9ed;
         margin-top: 2.5rem;
+      }
+      .light {
+        font-weight: 300;
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>Api Explorer</h1>
+      <h1 class=light>Api Explorer</h1>
     </header>
     <main>
       <section>
@@ -131,7 +144,7 @@
           </form>
         </article>
         <article class=result-box>
-          <h2>API Key Endpoint Results</h2>
+          <h2 class="light">API Key Endpoint Results</h2>
           <iframe name=apikey_results srcdoc="..."></iframe>
         </article>
       </section>
@@ -150,14 +163,14 @@
               <fieldset>
                 <legend>Request Auth</legend>
                 <p>
-                  <label for=territory_api_key>Provider API Key</label>
-                  <input required type=text id=territory_api_key name=api_key>
+                  <label for=provider_api_key>Provider API Key</label>
+                  <input required type=text id=provider_api_key name=api_key>
               </fieldset>
               <fieldset>
                 <legend>Endpoint Search</legend>
                 <p>
-                  <label for=territory_query>Search query</label>
-                  <input type=search id=territory_query name=query>
+                  <label for=provider_query>Search query</label>
+                  <input type=search id=provider_query name=query>
               </fieldset>
               <fieldset>
                 <legend>Provider</legend>
@@ -175,13 +188,13 @@
                   <input required type=tel id=provider_phone name=phone>
                 <p>
                   <label for=provider_lang>Language</label>
-                  <select requiredid=provider_lang name=lang>
+                  <select required id=provider_lang name=lang>
                     <option value=en>English</option>
                     <option value=zh>Chinese</option>
                   </select>
                 <p>
                   <label for=provider_fiat>Currency</label>
-                  <select requiredid=provider_fiat name=fiat>
+                  <select required id=provider_fiat name=fiat>
                     <option value=usd>USD</option>
                     <option value=usd>HKD</option>
                   </select>
@@ -194,7 +207,7 @@
           </form>
         </article>
         <article class=result-box>
-          <h2>Provider Endpoint Results</h2>
+          <h2 class="light">Provider Endpoint Results</h2>
           <iframe name=provider_results srcdoc="..."></iframe>
         </article>
       </section>
@@ -247,7 +260,7 @@
           </form>
         </article>
         <article class=result-box>
-          <h2>Territory Endpoint Results</h2>
+          <h2 class="light">Territory Endpoint Results</h2>
           <iframe name=territory_results srcdoc="..."></iframe>
         </article>
       </section>

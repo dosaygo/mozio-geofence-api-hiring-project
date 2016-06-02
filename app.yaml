@@ -1,4 +1,4 @@
-module: mozio-geofence
+service: mozio-geofence
 runtime: python27
 threadsafe: true
 api_version: 1
