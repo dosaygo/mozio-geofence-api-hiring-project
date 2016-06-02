@@ -4,12 +4,12 @@ from webapp2 import (
       RequestHandler as Service
     )
 
-class TerritoryService( Service ):
+class ProviderService( Service ):
   def post( self ):
     self.response.out.write( "OORAH" )
 
 endpoint = Endpoint( [
-    path( r'/api/territory', handler = TerritoryService )
+    path( r'/api/provider', handler = ProviderService )
   ], debug = True )
 
 

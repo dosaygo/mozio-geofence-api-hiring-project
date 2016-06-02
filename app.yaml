@@ -5,6 +5,13 @@ api_version: 1
 
 handlers:
 
+- url: /api/apikey.*
+  script: api.apikey.endpoint
+  secure: always
+
+- url: /api/territory.*
+  script: api.territory.endpoint
+  secure: always
 - url: /api/provider.*
   script: api.provider.endpoint
   secure: always

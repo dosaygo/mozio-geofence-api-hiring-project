@@ -41,7 +41,7 @@
         font-size: 6rem;
       }
       form, fieldset {
-        display: table-cell;
+        display: table;
       }
       form {
         padding: 1rem;
@@ -94,7 +94,7 @@
         max-height: 100%;
         border: 2px groove lightgrey;
         background: #fcf9ed;
-        margin-top: 2.5rem;
+        margin-top: 3.5rem;
       }
       .light {
         font-weight: 300;
@@ -121,7 +121,7 @@
                 <p>
                 <label for=apikey_admin>Call Endpoint as</label>
                   <select readonly id=apikey_admin name=admin>
-                    <option selected value=admin>Admin</option>
+                    <option selected value=admin>God</option>
                   </select>
               </fieldset>
               <fieldset>
@@ -242,15 +242,15 @@
                   <input type=text id=territory_id name=id>
                 <p>
                   <label for=territory_provider_name>Provider Name</label>
-                  <input type=text id=territory_provider_name name=provider_name>
+                  <input type=text id=territory_provider_name required name=provider_name>
                 <p>
                   <label for=territory_service_price>Service Price</label>
                   <input type=number id=territory_service_price 
                     step=0.01
-                    name=service_price>
+                    required name=service_price>
                 <p>
                   <label for=territory_corners>Polygon Corners</label>
-                  <textarea id=territory_corners name=corners></textarea>
+                  <textarea id=territory_corners required name=corners></textarea>
               </fieldset>
               <p center>
                 <input type=submit>
