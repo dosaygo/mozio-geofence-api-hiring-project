@@ -95,7 +95,7 @@
     <main>
       <section>
         <article>
-          <form action=/api/apikey method=POST>
+          <form action=/api/apikey method=POST target=apikey_results>
             <fieldset>
               <legend center>API Key Endpoint</legend>
               <select id=apikey_action name=action>
@@ -132,12 +132,12 @@
         </article>
         <article class=result-box>
           <h2>API Key Endpoint Results</h2>
-          <iframe srcdoc="..."></iframe>
+          <iframe name=apikey_results srcdoc="..."></iframe>
         </article>
       </section>
       <section>
         <article>
-          <form action=/api/provider method=POST>
+          <form action=/api/provider method=POST target=provider_results>
             <fieldset>
               <legend center>Provider Endpoint</legend>
               <select id=provider_action name=action>
@@ -163,16 +163,16 @@
                 <legend>Provider</legend>
                 <p>
                   <label for=provider_id>Entity ID</label>
-                  <input requiredtype=text id=provider_id name=id>
+                  <input type=text id=provider_id name=id>
                 <p>
                   <label for=provider_name>Provider Name</label>
-                  <input requiredtype=text id=provider_name name=name>
+                  <input required type=text id=provider_name name=name>
                 <p>
                   <label for=provider_email>Provider Email</label>
-                  <input requiredtype=email id=provider_email name=email>
+                  <input required type=email id=provider_email name=email>
                 <p>
                   <label for=provider_phone>Provider Phone</label>
-                  <input requiredtype=tel id=provider_phone name=phone>
+                  <input required type=tel id=provider_phone name=phone>
                 <p>
                   <label for=provider_lang>Language</label>
                   <select requiredid=provider_lang name=lang>
@@ -195,12 +195,12 @@
         </article>
         <article class=result-box>
           <h2>Provider Endpoint Results</h2>
-          <iframe srcdoc="..."></iframe>
+          <iframe name=provider_results srcdoc="..."></iframe>
         </article>
       </section>
       <section>
         <article>
-          <form action=/api/territory method=POST>
+          <form action=/api/territory method=POST target=territory_results>
             <fieldset>
               <legend center>Territory Endpoint</legend>
               <select id=territory_action name=action>
@@ -248,7 +248,7 @@
         </article>
         <article class=result-box>
           <h2>Territory Endpoint Results</h2>
-          <iframe srcdoc="..."></iframe>
+          <iframe name=territory_results srcdoc="..."></iframe>
         </article>
       </section>
     </main>
