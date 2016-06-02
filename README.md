@@ -6,11 +6,11 @@ Build a geofence API for Mozio.
 
 Exact GeoFence search involves many operations, and includes things like occupancy trees. 
 
-Why go to all the trouble ?
+*Why go to all the trouble ?*
 
 We can have an approximate geofence search, that is still mostly useful.
 
-It's faster, and involves less code and operations.
+It's faster, and involves less code and operations. That's FAST, capital letters fast.
 
 And of course, if you want to change the internals to exact later on, well, of course you can!
 
