@@ -6,6 +6,8 @@ from webapp2 import (
       RequestHandler as Service
     )
 
+import convert
+
 class ProviderService( Service ):
 
   def post( self, 
@@ -17,21 +19,13 @@ class ProviderService( Service ):
     output = None
 
     # convert from input format
-    if input_format == 'json':
-      params = json.loads( self.request.body )
-    elif input_format == 'x-www-form-urlencoded':
-      params = self.request.params.mixed()
-   
+    params = convert.to_dict( self.request, input_format )
+
     # process input to output
     result = params
 
     # convert to output format
-    if output_format == 'json':
-      output = json.dumps( result )
-    elif output_format == 'html':
-      output = "<pre><code> %s </code></pre>" % json.dumps( result, 
-                                                  indent = 2,
-                                                  sort_keys = True )
+    output = convert.from_dict( params, output_format )
 
     self.response.out.write( output )
 

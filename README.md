@@ -22,3 +22,14 @@ There are other approximations we can choose, and this is one place to start.
 
 It's straightforward, and can always be extended.
 
+## some details, please
+
+Okay well we get a bag of x,y points. We can use k-means to group these into clusters. And each cluster we can make a circle centered on the mean point, with the cluster radius. That effectively decomposes the polygon into circles. Now, these aren't guaranteed to be overlapping circles. But maybe we can find a way to do it that does guarantee overlap, minimum covering of a polygon with circles. We could do the min cover with squares, then expand them into circles that cover those squares, guaranteeing the cover is preserved.
+
+But hey, that's an improvement. And we are just doing the most straightforward method, which is...
+
+Finding the centroid, and the distance to the fursthes point, and making a circle based on those two co-ordinates to approximate the territory. 
+
+Search on these circles is guaranteed fast, and we use Google App Engine's Search API's GeoPt class, combined with the distance function to perform these searches. 
+
+
