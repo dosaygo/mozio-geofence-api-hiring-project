@@ -6,7 +6,7 @@ from webapp2 import (
       RequestHandler as Service
     )
 
-class ProviderService( Service ):
+class APIKeyService( Service ):
 
   def post( self, 
       input_format = 'x-www-form-urlencoded', 
@@ -36,10 +36,10 @@ class ProviderService( Service ):
     self.response.out.write( output )
 
 endpoint = Endpoint( [
-    path( r'/api/provider', handler = ProviderService ),
-    path( r'/api/provider/in/<input_format>', handler = ProviderService ),
-    path( r'/api/provider/out/<output_format>', handler = ProviderService ),
-    path( r'/api/provider/in/<input_format>/out/<output_format>', handler = ProviderService )
+    path( r'/api/apikey', handler = APIKeyService ),
+    path( r'/api/apikey/in/<input_format>', handler = APIKeyService ),
+    path( r'/api/apikey/out/<output_format>', handler = APIKeyService ),
+    path( r'/api/apikey/in/<input_format>/out/<output_format>', handler = APIKeyService )
   ], debug = True )
 
 
