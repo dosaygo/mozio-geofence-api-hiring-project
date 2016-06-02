@@ -2,13 +2,109 @@
 <html>
   <head>
     <title>API Explorer</title>
+    <style>
+      :root {
+        font-family: Georgia, serif;
+      }
+      body {
+        background-color: lightblue;
+      }
+      h1 {
+        font-family: Helvetica, san s-serif;
+        letter-spacing: 0.03rem;
+        padding: 4rem 0 1rem 0;
+        font-size: 6rem;
+        margin: 0;
+        word-break: break-word;
+        text-align: center;
+      }
+      form {
+        display: table;
+        padding: 1rem;
+        margin: 1rem auto;
+      }
+      fieldset {
+        padding: 1rem;
+        background: #fff;
+      }
+      legend {
+        background: #fff;
+        border-top: 2px groove lightgrey;
+      }
+      input, select, textarea {
+        display: block;
+        font-size: 1rem;
+        margin: 0.5rem;
+        width:90%;
+        box-sizing: border-box;
+      }
+
+      main {
+        width: 42rem;
+        max-width: calc( 100% - 8rem );
+        margin: 0 auto;
+        padding-bottom: 8rem;
+      }
+      section {
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-    <form action=/api/provider method=POST>
-
-    </form>
-    <form action=/api/territory method=POST>
-
-    </form>
+    <header>
+      <h1>Api Explorer</h1>
+    </header>
+    <main>
+      <section>
+        <form action=/api/provider method=POST>
+          <fieldset>
+            <legend>Provider</legend>
+            <select name=action>
+              <option value=create>Create</option>
+              <option value=search>Search</option>
+              <option value=update>Update</option>
+              <option value=read>Read</option>
+              <option value=delete>Delete</option>
+            </select>
+            <input type=search name=query>
+            <input type=text name=id>
+            <input type=text name=name>
+            <input type=email name=email>
+            <input type=tel name=phone>
+            <select name=lang>
+              <option value=en>English</option>
+              <option value=zh>Chinese</option>
+            </select>
+            <select name=fiat>
+              <option value=usd>USD</option>
+              <option value=usd>HKD</option>
+            </select>
+            <input type=submit>
+            <input type=reset>
+          </fieldset>
+        </form>
+      </section>
+      <section>
+        <form action=/api/territory method=POST>
+          <fieldset>
+            <legend>Territory</legend>
+            <select name=action>
+              <option value=create>Create</option>
+              <option value=search>Search</option>
+              <option value=update>Update</option>
+              <option value=read>Read</option>
+              <option value=delete>Delete</option>
+            </select>
+            <input type=search name=query>
+            <input type=text name=id>
+            <input type=text name=provider_name>
+            <input type=number name=service_price>
+            <textarea name=corners></textarea>
+            <input type=submit>
+            <input type=reset>
+          </fieldset>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
