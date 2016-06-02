@@ -1,5 +1,3 @@
-import json
-
 from google.appengine.api import search
 
 from webapp2 import (
@@ -15,6 +13,7 @@ import convert
 
 from service import Service 
 
+
 class APIKeyService( Service ):
   index = search.Index( 'apikey' )
 
@@ -25,6 +24,7 @@ class APIKeyService( Service ):
           search.TextField( name='name', value=params.get( 'name' ) ),
           search.AtomField( name='api_key', value=params.get( 'api_key' ) )
         ] )
+
 
 endpoint = Endpoint( [
     base( r'/mozio-geofence', [

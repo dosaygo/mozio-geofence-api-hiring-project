@@ -1,5 +1,3 @@
-import json
-
 from google.appengine.api import search
 
 from webapp2 import (
@@ -14,6 +12,7 @@ from webapp2_extras.routes import (
 import convert
 
 from service import Service 
+
 
 class ProviderService( Service ):
   index = search.Index( 'provider' )

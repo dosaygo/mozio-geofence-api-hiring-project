@@ -2,16 +2,14 @@ import json
 
 from google.appengine.api import search
 
-from webapp2 import (
-    RequestHandler as BaseService
-  )
+from webapp2 import RequestHandler as BaseService
 
 import convert
 
 class Service( BaseService ):
   def createDoc( self, params ):
     """  
-      Create the document and add it to the Provider index.
+      Create the document and add it to the index.
     """
     doc = self.makeDoc( params )
     result = self.index.put( doc )
@@ -26,24 +24,27 @@ class Service( BaseService ):
 
   def updateDoc( self, doc ):
     """
-      Save the modified provider doc to the index.
+      Save the modified doc to the index.
     """
     self.index.put( doc )
 
   def readDoc( self, id ):
     """
-      Read the provider document by id.
+      Read the document by id.
     """
     return self.index.get( id )
   
   def searchDoc( self, query ):
     """
-      Search the provider index using a query.
+      Search the index using a query.
     """
     results = self.index.search( query )
     return list( results )
 
   def processRequest( self, action, params ):
+    """
+      Process a request handling each of a set of possible actions.
+    """
     if action == 'create':
       result = self.createDoc( params )
       return convert.to_dict( result, 'x-search-api-doc' )
@@ -62,7 +63,12 @@ class Service( BaseService ):
   def post( self, 
       input_format = 'x-www-form-urlencoded', 
       output_format = 'html' ):
-
+    """
+      A standard post method that accepts data,
+      handles converting from the input format,
+      processes the request, and returns the response
+      also handling converting to the output format.
+    """
     params = None
     result = dict()
     output = None
