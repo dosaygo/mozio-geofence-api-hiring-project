@@ -1,10 +1,14 @@
 import json
 
 from webapp2 import (
-      WSGIApplication as Endpoint,
-      Route as path,
-      RequestHandler as Service
-    )
+    WSGIApplication as Endpoint,
+    Route as path,
+    RequestHandler as Service
+  )
+
+from webapp2_extras.routes import (
+    PathPrefixRoute as base
+  )
 
 import convert
 
@@ -30,10 +34,12 @@ class APIKeyService( Service ):
     self.response.out.write( output )
 
 endpoint = Endpoint( [
-    path( r'/api/apikey', handler = APIKeyService ),
-    path( r'/api/apikey/in/<input_format>', handler = APIKeyService ),
-    path( r'/api/apikey/out/<output_format>', handler = APIKeyService ),
-    path( r'/api/apikey/in/<input_format>/out/<output_format>', handler = APIKeyService )
+    base( r'/mozio-geofence', [
+      path( r'/api/apikey', handler = APIKeyService ),
+      path( r'/api/apikey/in/<input_format>', handler = APIKeyService ),
+      path( r'/api/apikey/out/<output_format>', handler = APIKeyService ),
+      path( r'/api/apikey/in/<input_format>/out/<output_format>', handler = APIKeyService )
+    ] )
   ], debug = True )
 
 

@@ -1,10 +1,14 @@
 import json
 
 from webapp2 import (
-      WSGIApplication as Endpoint,
-      Route as path,
-      RequestHandler as Service
-    )
+    WSGIApplication as Endpoint,
+    Route as path,
+    RequestHandler as Service
+  )
+
+from webapp2_extras.routes import (
+    PathPrefixRoute as base
+  )
 
 import convert
 
@@ -30,10 +34,12 @@ class TerritoryService( Service ):
     self.response.out.write( output )
 
 endpoint = Endpoint( [
-    path( r'/api/territory', handler = TerritoryService ),
-    path( r'/api/territory/in/<input_format>', handler = TerritoryService ),
-    path( r'/api/territory/out/<output_format>', handler = TerritoryService ),
-    path( r'/api/territory/in/<input_format>/out/<output_format>', handler = TerritoryService )
+    base( r'/mozio-geofence', [
+      path( r'/api/territory', handler = TerritoryService ),
+      path( r'/api/territory/in/<input_format>', handler = TerritoryService ),
+      path( r'/api/territory/out/<output_format>', handler = TerritoryService ),
+      path( r'/api/territory/in/<input_format>/out/<output_format>', handler = TerritoryService )
+    ] )
   ], debug = True )
 
 

@@ -5,22 +5,23 @@ api_version: 1
 
 handlers:
 
-- url: /api/apikey.*
+- url: /mozio-geofence/api/apikey.*
   script: api.apikey.endpoint
   secure: always
 
-- url: /api/territory.*
+- url: /mozio-geofence/api/territory.*
   script: api.territory.endpoint
   secure: always
-- url: /api/provider.*
+
+- url: /mozio-geofence/api/provider.*
   script: api.provider.endpoint
   secure: always
 
-- url: /api/territory.*
+- url: /mozio-geofence/api/territory.*
   script: api.territory.endpoint
   secure: always
 
-- url: /.*
+- url: /mozio-geofence.*
   static_files: apiexplorer.html
   upload: apiexplorer\.html
   secure: always
