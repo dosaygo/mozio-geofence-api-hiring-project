@@ -1,5 +1,7 @@
 import json
 
+from google.appengine.api import search
+
 from webapp2 import (
     WSGIApplication as Endpoint,
     Route as path,
@@ -12,12 +14,19 @@ from webapp2_extras.routes import (
 
 import convert
 
-class TerritoryService( Service ):
+from service import Service
 
-  def searchTerritory( self, query ):
-    """ 
-      search for a territory by query string
-    """
+class TerritoryService( Service ):
+  index = search.Index( 'territory' )
+
+  def makeDoc( self, params, doc_id = None ):
+    return search.Document(
+        doc_id = doc_id,
+        fields = [
+          search.TextField( name='provider_name', value=params.get( 'provider_name' ) ),
+          search.NumberField( name='service_price', value=float( params.get( 'service_price' ) ) ),
+          search.TextField( name='corners', value=params.get( 'corners' ) )
+        ] )
 
   def searchTerritoriesIntersectingLatLong( sef, lat, long ):
     """
@@ -25,44 +34,6 @@ class TerritoryService( Service ):
       search for territories intersect
     """
 
-  def createTerritory( self, params ):
-    """
-      Create a territory document and add it to the index
-    """
-
-  def updateTerritory( self, doc ):
-    """
-      Save the updated territory doc to an index
-    """
-
-  def deleteTerritory( self, id ):
-    """
-      Delete the territory from the index by id
-    """
-
-  def readTerritory( self, id ):
-    """
-      Get the territory from the index by id
-    """
-
-  def post( self, 
-      input_format = 'x-www-form-urlencoded', 
-      output_format = 'html' ):
-
-    params = None
-    result = None
-    output = None
-
-    # convert from input format
-    params = convert.to_dict( self.request, input_format )
-
-    # process input to output
-    result = params
-
-    # convert to output format
-    output = convert.from_dict( params, output_format )
-
-    self.response.out.write( output )
 
 endpoint = Endpoint( [
     base( r'/mozio-geofence', [

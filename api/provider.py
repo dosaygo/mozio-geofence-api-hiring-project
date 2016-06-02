@@ -1,9 +1,10 @@
 import json
 
+from google.appengine.api import search
+
 from webapp2 import (
     WSGIApplication as Endpoint,
-    Route as path,
-    RequestHandler as Service
+    Route as path
   )
 
 from webapp2_extras.routes import (
@@ -12,53 +13,22 @@ from webapp2_extras.routes import (
 
 import convert
 
+from service import Service 
+
 class ProviderService( Service ):
+  index = search.Index( 'provider' )
 
-  def createProvider( self, params ):
-    """  
-      Create the document
-    """
-    asdas
-    """ create the document """
-    sdsdfsfd
-    """ add it to index """
-    asdasds
+  def makeDoc( self, params, doc_id = None ):
+    return search.Document(
+        doc_id = doc_id,
+        fields = [
+          search.TextField( name='name', value=params.get( 'name' ) ),
+          search.AtomField( name='email', value=params.get( 'email' ) ),
+          search.AtomField( name='phone', value=params.get( 'phone' ) ),
+          search.AtomField( name='lang', value=params.get( 'lang' ) ),
+          search.AtomField( name='fiat', value=params.get( 'fiat' ) )
+        ] )
 
-  def deleteProvider( self, id ):
-    """
-      Delete the document
-    """
-    """ remove the document from index """
-
-  def updateProvider( self, doc ):
-    """
-      Save the modified provider doc to the index
-    """
-    """ save to index """
-
-  def readProvider( self, id ):
-    """
-      read the provider document by id
-    """
-
-  def post( self, 
-      input_format = 'x-www-form-urlencoded', 
-      output_format = 'html' ):
-
-    params = None
-    result = None
-    output = None
-
-    # convert from input format
-    params = convert.to_dict( self.request, input_format )
-
-    # process input to output
-    result = params
-
-    # convert to output format
-    output = convert.from_dict( params, output_format )
-
-    self.response.out.write( output )
 
 endpoint = Endpoint( [
     base( r'/mozio-geofence', [

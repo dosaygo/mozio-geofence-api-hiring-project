@@ -1,9 +1,10 @@
 import json
 
+from google.appengine.api import search
+
 from webapp2 import (
     WSGIApplication as Endpoint,
-    Route as path,
-    RequestHandler as Service
+    Route as path
   )
 
 from webapp2_extras.routes import (
@@ -12,46 +13,18 @@ from webapp2_extras.routes import (
 
 import convert
 
+from service import Service 
+
 class APIKeyService( Service ):
+  index = search.Index( 'apikey' )
 
-  def createAPIKey( self, params ):
-    """
-      Create an APIKey doc and add it to the index
-    """
-
-  def deleteAPIKey( self, id ):
-    """
-      Delete an APIKey from the index by id
-    """
-
-  def searchAPIKey( self, query ):
-    """ 
-      Find an APIKey by querying the index 
-    """
-
-  def readAPIKey( self, id ):
-    """
-      Read an APIKey from the index by id
-    """
-  
-  def post( self, 
-      input_format = 'x-www-form-urlencoded', 
-      output_format = 'html' ):
-
-    params = None
-    result = None
-    output = None
-
-    # convert from input format
-    params = convert.to_dict( self.request, input_format )
-
-    # process input to output
-    result = params
-
-    # convert to output format
-    output = convert.from_dict( params, output_format )
-
-    self.response.out.write( output )
+  def makeDoc( self, params, doc_id = None ):
+    return search.Document(
+        doc_id = doc_id,
+        fields = [
+          search.TextField( name='name', value=params.get( 'name' ) ),
+          search.AtomField( name='api_key', value=params.get( 'api_key' ) )
+        ] )
 
 endpoint = Endpoint( [
     base( r'/mozio-geofence', [

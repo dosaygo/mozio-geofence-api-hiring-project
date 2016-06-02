@@ -92,11 +92,15 @@
         width: 40%;
         min-width: 320px;
         max-width: 600px;
-        max-height: 80%;
-        height: 320px;
         border: 2px groove lightgrey;
         background: #fcf9ed;
         margin-top: 3.5rem;
+      }
+      .iframe-box {
+        background: rgba( 50, 50, 50, 0.2 );
+        height: 320px;
+        padding: 0 3px 0.5rem 0;
+        box-sizing: border-box;
       }
       .light {
         font-weight: 300;
@@ -115,6 +119,7 @@
               <legend center>API Key Endpoint</legend>
               <select id=apikey_action name=action>
                 <option value=create>Create</option>
+                <option value=search>Search</option>
                 <option value=read>Read</option>
                 <option value=delete>Delete</option>
               </select>
@@ -125,6 +130,12 @@
                   <select readonly id=apikey_admin name=admin>
                     <option selected value=admin>God</option>
                   </select>
+              </fieldset>
+              <fieldset>
+                <legend>Endpoint Search</legend>
+                <p>
+                  <label for=apikey_query>Search query</label>
+                  <input type=search id=apikey_query name=query>
               </fieldset>
               <fieldset>
                 <legend>API Key</legend>
@@ -147,7 +158,9 @@
         </article>
         <article class=result-box>
           <h2 class="light">API Key Endpoint Results</h2>
-          <iframe name=apikey_results srcdoc="..."></iframe>
+          <div class=iframe-box>
+            <iframe name=apikey_results srcdoc="..."></iframe>
+          </div>
         </article>
       </section>
       <section>
@@ -181,22 +194,22 @@
                   <input type=text id=provider_id name=id>
                 <p>
                   <label for=provider_name>Provider Name</label>
-                  <input required type=text id=provider_name name=name>
+                  <input type=text id=provider_name name=name>
                 <p>
                   <label for=provider_email>Provider Email</label>
-                  <input required type=email id=provider_email name=email>
+                  <input type=email id=provider_email name=email>
                 <p>
                   <label for=provider_phone>Provider Phone</label>
-                  <input required type=tel id=provider_phone name=phone>
+                  <input type=tel id=provider_phone name=phone>
                 <p>
                   <label for=provider_lang>Language</label>
-                  <select required id=provider_lang name=lang>
+                  <select id=provider_lang name=lang>
                     <option value=en>English</option>
                     <option value=zh>Chinese</option>
                   </select>
                 <p>
                   <label for=provider_fiat>Currency</label>
-                  <select required id=provider_fiat name=fiat>
+                  <select id=provider_fiat name=fiat>
                     <option value=usd>USD</option>
                     <option value=usd>HKD</option>
                   </select>
@@ -210,7 +223,9 @@
         </article>
         <article class=result-box>
           <h2 class="light">Provider Endpoint Results</h2>
-          <iframe name=provider_results srcdoc="..."></iframe>
+          <div class=iframe-box>
+            <iframe name=provider_results srcdoc="..."></iframe>
+          </div>
         </article>
       </section>
       <section>
@@ -244,15 +259,15 @@
                   <input type=text id=territory_id name=id>
                 <p>
                   <label for=territory_provider_name>Provider Name</label>
-                  <input type=text id=territory_provider_name required name=provider_name>
+                  <input type=text id=territory_provider_name name=provider_name>
                 <p>
                   <label for=territory_service_price>Service Price</label>
                   <input type=number id=territory_service_price 
                     step=0.01
-                    required name=service_price>
+                    name=service_price>
                 <p>
                   <label for=territory_corners>Polygon Corners</label>
-                  <textarea id=territory_corners required name=corners></textarea>
+                  <textarea id=territory_corners name=corners></textarea>
               </fieldset>
               <p center>
                 <input type=submit>
@@ -263,7 +278,9 @@
         </article>
         <article class=result-box>
           <h2 class="light">Territory Endpoint Results</h2>
-          <iframe name=territory_results srcdoc="..."></iframe>
+          <div class=iframe-box>
+            <iframe name=territory_results srcdoc="..."></iframe>
+          </div>
         </article>
       </section>
     </main>
