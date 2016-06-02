@@ -26,5 +26,9 @@ handlers:
   upload: apiexplorer\.html
   secure: always
 
+- url: .*
+  static_files: landing.html
+  upload: landing\.html
+  secure: always
 
 
