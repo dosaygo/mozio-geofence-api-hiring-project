@@ -1,0 +1,5 @@
+module: mozio-geofence
+runtime: python27
+threadsafe: true
+api_version: 2
+
