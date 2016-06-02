@@ -14,6 +14,33 @@ import convert
 
 class ProviderService( Service ):
 
+  def createProvider( self, params ):
+    """  
+      Create the document
+    """
+    asdas
+    """ create the document """
+    sdsdfsfd
+    """ add it to index """
+    asdasds
+
+  def deleteProvider( self, id ):
+    """
+      Delete the document
+    """
+    """ remove the document from index """
+
+  def updateProvider( self, doc ):
+    """
+      Save the modified provider doc to the index
+    """
+    """ save to index """
+
+  def readProvider( self, id ):
+    """
+      read the provider document by id
+    """
+
   def post( self, 
       input_format = 'x-www-form-urlencoded', 
       output_format = 'html' ):

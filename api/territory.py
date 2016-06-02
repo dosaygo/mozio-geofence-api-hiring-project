@@ -14,6 +14,37 @@ import convert
 
 class TerritoryService( Service ):
 
+  def searchTerritory( self, query ):
+    """ 
+      search for a territory by query string
+    """
+
+  def searchTerritoriesIntersectingLatLong( sef, lat, long ):
+    """
+      make a query string using lat long and 
+      search for territories intersect
+    """
+
+  def createTerritory( self, params ):
+    """
+      Create a territory document and add it to the index
+    """
+
+  def updateTerritory( self, doc ):
+    """
+      Save the updated territory doc to an index
+    """
+
+  def deleteTerritory( self, id ):
+    """
+      Delete the territory from the index by id
+    """
+
+  def readTerritory( self, id ):
+    """
+      Get the territory from the index by id
+    """
+
   def post( self, 
       input_format = 'x-www-form-urlencoded', 
       output_format = 'html' ):

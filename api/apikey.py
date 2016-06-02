@@ -14,6 +14,26 @@ import convert
 
 class APIKeyService( Service ):
 
+  def createAPIKey( self, params ):
+    """
+      Create an APIKey doc and add it to the index
+    """
+
+  def deleteAPIKey( self, id ):
+    """
+      Delete an APIKey from the index by id
+    """
+
+  def searchAPIKey( self, query ):
+    """ 
+      Find an APIKey by querying the index 
+    """
+
+  def readAPIKey( self, id ):
+    """
+      Read an APIKey from the index by id
+    """
+  
   def post( self, 
       input_format = 'x-www-form-urlencoded', 
       output_format = 'html' ):
