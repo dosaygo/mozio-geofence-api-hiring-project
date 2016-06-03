@@ -48,7 +48,7 @@ class TerritoryService( Service ):
 
       if action == 'latlongsearch':
         geopoint = convert.to_Search_API_GeoPoint_or_raise( params.get( 'latlongquery' ) )
-        query = "distance(centroid, geopoint(%s, %s)) < 100" % ( str( geopoint.latitude ), str( geopoint.longitude ) )
+        query = "distance(centroid, geopoint(%s, %s)) < %s" % ( str( geopoint.latitude ), str( geopoint.longitude ), str( geofencesearch.MAX_TERRITORY_RADIUS_M ) )
         result = self.searchDoc( query ) 
         return [ convert.to_dict( doc, 'x-search-api-doc' ) for doc in result ]
       else:

@@ -27,6 +27,7 @@ class Service( BaseService ):
       Save the modified doc to the index.
     """
     self.index.put( doc )
+    return doc
 
   def readDoc( self, id ):
     """
@@ -51,12 +52,14 @@ class Service( BaseService ):
     elif action == 'delete':
       return self.deleteDoc( params.get( 'id' ) )
     elif action == 'update':
-      return self.updateDoc( self.makeDoc( params, params.get( 'id' ) ) )
+      result = self.updateDoc( self.makeDoc( params, params.get( 'id' ) ) )
+      return convert.to_dict( result, 'x-search-api-doc' )
     elif action == 'search':
       result = self.searchDoc( params.get( 'query' ) )
       return [ convert.to_dict( doc, 'x-search-api-doc' ) for doc in result ]
     elif action == 'read':
-      return self.readDoc( params.get( 'id' ) )
+      result = self.readDoc( params.get( 'id' ) )
+      return convert.to_dict( result, 'x-search-api-doc' )
     else:
       raise TypeError( "Action %s must be one of create, delete, update, search or read. It is not." % action )
 

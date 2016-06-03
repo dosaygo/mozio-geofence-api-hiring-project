@@ -211,7 +211,7 @@
                   <label for=provider_fiat>Currency</label>
                   <select id=provider_fiat name=fiat>
                     <option value=usd>USD</option>
-                    <option value=usd>HKD</option>
+                    <option value=hkd>HKD</option>
                   </select>
               </fieldset>
               <p center>
@@ -235,6 +235,7 @@
               <legend center>Territory Endpoint</legend>
               <select id=territory_action name=action>
                 <option value=create>Create</option>
+                <option value=latlongsearch>Lat Long Search</option>
                 <option value=search>Search</option>
                 <option value=update>Update</option>
                 <option value=read>Read</option>
@@ -251,6 +252,9 @@
                 <p>
                   <label for=territory_query>Search query</label>
                   <input type=search id=territory_query name=query>
+                <p>
+                  <label for=territory_latlongquery>Lat Long query</label>
+                  <input type=search id=territory_latlongquery name=latlongquery>
               </fieldset>
               <fieldset>
                 <legend>Territory</legend>

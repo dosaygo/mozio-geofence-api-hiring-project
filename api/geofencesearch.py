@@ -2,6 +2,16 @@ from google.appengine.api import search
 
 import convert
 
+"""
+  Limitations:
+
+    1. Providers can only enter a single territory whose set of points does not result in a radius larger than 250 m. So providers need to enter their territories in a piecemeal fashion. 
+
+    2. When searching for a latitude and longitude we return all territories whose centre of operations ( as defined by the centroid in the polygon of the territory corners ), is within the maximum radius of a territory. So this means that the territories so returned, are not guaranteed to intersect with the given point, tho they are guaranteed to be within ( or more strictly, to have their centres within ) MAX_TERRITORY_RADIUS of the given point. 
+"""
+
+MAX_TERRITORY_RADIUS_M = 250
+
 def compute_centroid( geopt_corners ):
   """
     Use the centroid formula to compute the centroid

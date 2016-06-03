@@ -4,6 +4,8 @@ import re
 from google.appengine.api import search
 
 def to_dict( request, input_format ):
+  if request is None:
+    return {}
   if input_format == 'json':
     return json.loads( request.body )
   elif input_format == 'x-www-form-urlencoded':
@@ -16,6 +18,8 @@ def to_dict( request, input_format ):
     raise TypeError( "Input format %s must be one of json or html. It is not." % input_format )
     
 def from_dict( result, output_format ):
+  if result is None:
+    result = {}
   if output_format == 'json':
     return json.dumps( result )
   elif output_format == 'html':
