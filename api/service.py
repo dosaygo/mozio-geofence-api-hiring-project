@@ -58,7 +58,7 @@ class Service( BaseService ):
     elif action == 'read':
       return self.readDoc( params.get( 'id' ) )
     else:
-      raise TypeError( "Action %s must be one of create, delete, update, search or read. It is not." )
+      raise TypeError( "Action %s must be one of create, delete, update, search or read. It is not." % action )
 
   def post( self, 
       input_format = 'x-www-form-urlencoded', 
