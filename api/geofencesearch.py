@@ -1,3 +1,5 @@
+import json
+
 from google.appengine.api import search
 
 import convert
@@ -39,3 +41,12 @@ def compute_radius( centroid, geopt_corners ):
   """
   return 0.0
 
+def create_geojson( props_dict, geopt_corners ):
+  return json.dumps( {
+      "type" : "Feature", 
+      "geometry" : {
+          "type": "Polygon",
+          "coordinates": [ [ p.latitude, p.longitude ] for p in geopt_corners ]
+        },
+      "properties" : props_dict
+    } )

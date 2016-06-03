@@ -24,6 +24,14 @@ class TerritoryService( Service ):
     geopt_corners = convert.to_list_of_Search_API_GeoPoints( params.get( 'corners' ), 'comma-gapped-list/whitespace-gapped-pairs' ) 
     centroid = geofencesearch.compute_centroid( geopt_corners )
     radius = geofencesearch.compute_radius( centroid, geopt_corners )
+    geojson = geofencesearch.create_geojson( {
+                    'specific_type' : {
+                        'name': 'Territory',
+                        'alias' : 'ServiceArea'
+                      },
+                    'provider_name' : params.get( 'provider_name' ), 
+                    'service_price' : params.get( 'service_price' ), 
+                  }, geopt_corners )
     return search.Document(
         doc_id = doc_id,
         fields = [
@@ -31,7 +39,8 @@ class TerritoryService( Service ):
           search.NumberField( name='service_price', value=float( params.get( 'service_price' ) ) ),
           search.TextField( name='corners', value=params.get( 'corners' ) ),
           search.GeoField( name='centroid', value=centroid ),
-          search.NumberField( name='radius', value=radius )
+          search.NumberField( name='radius', value=radius ),
+          search.TextField( name='geojson', value=geojson )
         ] )
 
   def searchTerritoriesIntersectingLatLong( sef, lat, long ):
@@ -42,7 +51,7 @@ class TerritoryService( Service ):
 
   def processRequest( self, action, params ):
     try:
-      super( Service, self ).processRequest( action, params )
+      return super( TerritoryService, self ).processRequest( action, params )
     except BaseException as e:
       logging.warn( "Action %s unsupported by superclass, Service. Attempting baseclass implementation." % action )
 
