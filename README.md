@@ -32,4 +32,38 @@ Finding the centroid, and the distance to the fursthes point, and making a circl
 
 Search on these circles is guaranteed fast, and we use Google App Engine's Search API's GeoPt class, combined with the distance function to perform these searches. 
 
+## an update
+
+In fact, there is a more workable improvement that the proposed decomposition into circles. One reason it works to choose this improvement is because of a limitation of the datastore. We cannot perform searches on repeated or list properties. That is, we cannot perform a property query on a named property which is a list, and hope to match that query against all items in that list in all entities. This is because there are no repeat properties in this datastore. 
+
+Despite this limitation it is true that not all territories are most effectively approximated by a circle. Some may be better approximated by a triangle of some shape. How can this be achieved having only a distance function ? 
+
+In addition to our method of "circulation", where we approximate territories by circles, and use a single centroid and a maximum radius as the bound against which to query the given point, we can employ a method of "triangulation", where we approximate territories by the intersection of three circles, and  use three centroids. Even if these all must share the same radius  ( being the maximum radius we choose ), still a great many types of triangular intersecting regions of the three circles are possible. 
+
+It is also a way we can ensure our point falls in a far smaller area than the given radius, since the fulfillment of the query of distance to three circles more greatly limits the size of the area that will fulfill it. This means we can also increase the length of the maximum radius to provide perhaps greater convenience for providers who can then enter territories covering larger areas. 
+
+## query examples
+
+*Note : We formulate these automatically using the given point.*
+
+**Circulation query**
+
+`distance(centroid, geopoint(x, y)) < 100`
+
+**Triangulation query**
+
+```
+ distance(centroid1, geopoint(x, y)) < 100 AND
+ distance(centroid2, geopoint(x, y)) < 100 AND
+ distance(centroid3, geopoint(x, y)) < 100
+```
+
+## How to employ this improvement
+
+There are two parts to using this:
+
+1. Decide which territories are better approximated by a circle, mark them as `circulated` and given them one centroid, and decide which are better approximated by a triangle and given them three centroids, and mark them as 'triangulated'
+
+2. Decide how to choose the three centroids in a way which provides a tight approximation.
+
 
