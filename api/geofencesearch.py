@@ -1,8 +1,8 @@
+
 import json
+import math
 
 from google.appengine.api import search
-
-import convert
 
 """
   Limitations:
@@ -13,6 +13,38 @@ import convert
 """
 
 MAX_TERRITORY_RADIUS_M = 250
+
+def convertWGS84ToGoogleBing( geopt ):
+  """
+    This is taken from here: https://alastaira.wordpress.com/2011/01/23/the-google-maps-bing-maps-spherical-mercator-projection/
+
+    We use it to convert between co-ordinate systems, so we can use the x, y system ( planar projection ), to compute centroids.
+  """
+  lat, lon = geopt.latitude, geopt.longitude
+  x = lon * 20037508.34 / 180 
+  y = math.log(math.tan((90 + lat) * math.pi / 360)) / (math.pi / 180)
+  y = y * 20037508.34 / 180
+  return [ x, y ]
+
+def convertGoogleBingToWGS84( xy ):
+  """
+    This is taken from here: https://alastaira.wordpress.com/2011/01/23/the-google-maps-bing-maps-spherical-mercator-projection/
+
+    We use it to convert between co-ordinate systems, so we can use the x, y system ( planar projection ), to compute centroids.
+
+    We convert back to lat long to get our GeoPoints.
+  """
+  x, y = xy[ 0 ], xy[ 1 ]
+  lon = (x / 20037508.34) * 180
+  lat = (y / 20037508.34) * 180
+  lat = 180/math.pi * (2 * math.atan(math.exp(lat * math.pi / 180)) - math.pi / 2)
+  return search.GeoPoint( lat, lon ) 
+
+def convert_geopoints_to_planar( geopt_corners ):
+  return [ convertWGS84ToGoogleBing( p ) for p in geopt_corners ]
+
+def convert_planars_to_geopoints( planars ):
+  return [ convertGoogleBingToWGS84( p ) for p in planars ] 
 
 def compute_graham_scan( geopt_corners ):
   """
@@ -58,7 +90,7 @@ def compute_centroid( geopt_corners ):
   
   
 
-  return search.GeoPoint( lat, long )
+  return ( lat, long )
 
 def compute_radius( centroid, geopt_corners ):
   """
@@ -78,3 +110,4 @@ def create_geojson( props_dict, geopt_corners ):
         },
       "properties" : props_dict
     } )
+
