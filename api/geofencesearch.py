@@ -14,6 +14,24 @@ import convert
 
 MAX_TERRITORY_RADIUS_M = 250
 
+def compute_graham_scan( geopt_corners ):
+  """
+    Attempt to clean the data,
+    and simplify it to an approximate shape
+    by returning the list of corners 
+    corresponding to the convex hull of the
+    given points.
+
+    It attempts this using the Graham Scan
+  """
+  pass
+
+def compute_area( geopt_corners ):
+  """
+    Compute the signed polygon area
+  """
+  pass
+
 def compute_centroid( geopt_corners ):
   """
     Use the centroid formula to compute the centroid
