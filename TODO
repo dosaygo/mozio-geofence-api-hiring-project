@@ -1,0 +1,8 @@
+- Add business logic of : 
+  - API key validation of all calls
+  - Provider validation ( must be a valid provider )
+  - Value validation ( values must be within bounds, and valid )
+
+- Add testing, territories can be got or put on Google Maps.
+- Add docs
+

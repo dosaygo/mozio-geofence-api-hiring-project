@@ -16,6 +16,12 @@ import graham_scan
 
 MAX_TERRITORY_RADIUS_M = 250
 
+def computeGeoPtCentroidFromGeoPtCorners( geopt_corners ):
+  planars = convert_geopoints_to_planar( geopt_corners )
+  hull = compute_graham_scan( planars )
+  centroid = compute_centroid( hull )
+  return convertGoogleBingToWGS84( centroid )
+
 def convertWGS84ToGoogleBing( geopt ):
   """
     This is taken from here: https://alastaira.wordpress.com/2011/01/23/the-google-maps-bing-maps-spherical-mercator-projection/

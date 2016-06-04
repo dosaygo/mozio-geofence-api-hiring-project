@@ -22,8 +22,7 @@ class TerritoryService( Service ):
 
   def makeDoc( self, params, doc_id = None ):
     geopt_corners = convert.to_list_of_Search_API_GeoPoints( params.get( 'corners' ), 'comma-gapped-list/whitespace-gapped-pairs' ) 
-    centroid = geofencesearch.compute_centroid( geopt_corners )
-    radius = geofencesearch.compute_radius( centroid, geopt_corners )
+    centroid = geofencesearch.computeGeoPtCentroidFromGeoPtCorners( geopt_corners )
     geojson = geofencesearch.create_geojson( {
                     'specific_type' : {
                         'name': 'Territory',
@@ -39,7 +38,6 @@ class TerritoryService( Service ):
           search.NumberField( name='service_price', value=float( params.get( 'service_price' ) ) ),
           search.TextField( name='corners', value=params.get( 'corners' ) ),
           search.GeoField( name='centroid', value=centroid ),
-          search.NumberField( name='radius', value=radius ),
           search.TextField( name='geojson', value=geojson )
         ] )
 
