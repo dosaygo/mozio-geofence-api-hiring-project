@@ -21,6 +21,11 @@ handlers:
   script: api.territory.endpoint
   secure: always
 
+- url: /mozio-geofence/docs.html
+  static_files: docs.html
+  upload: docs\.html
+  secure: always
+
 - url: /mozio-geofence.*
   static_files: apiexplorer.html
   upload: apiexplorer\.html
